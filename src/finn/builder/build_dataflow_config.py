@@ -134,7 +134,7 @@ default_build_dataflow_steps = [
 
 #: List of steps to run for an estimate-only (no synthesis) dataflow build
 estimate_only_dataflow_steps = [
-    "step_qonnx_to_finn",
+    # "step_qonnx_to_finn",
     "step_tidy_up",
     "step_streamline",
     "step_convert_to_hls",

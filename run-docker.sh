@@ -31,6 +31,13 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m' # No Color
 
+export ALVEO_BOARD=U280
+export PLATFORM_REPO_PATHS=/opt/xilinx/platforms
+export FINN_XILINX_VERSION=2022.2 
+export FINN_XILINX_PATH=/tools/Xilinx
+export FINN_BUILD_DIR=/home/omar/finn/build
+export FINN_EXAMPLES=/home/omar/finn-examples
+
 # green echo
 gecho () {
   echo -e "${GREEN}$1${NC}"
@@ -71,9 +78,9 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 
 # the settings below will be taken from environment variables if available,
 # otherwise the defaults below will be used
-: ${JUPYTER_PORT=8888}
+: ${JUPYTER_PORT=9000}
 : ${JUPYTER_PASSWD_HASH=""}
-: ${NETRON_PORT=8081}
+: ${NETRON_PORT=8082}
 : ${LOCALHOST_URL="localhost"}
 : ${PYNQ_USERNAME="xilinx"}
 : ${PYNQ_PASSWORD="xilinx"}

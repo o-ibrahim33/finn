@@ -64,6 +64,7 @@ from finn.transformation.streamline.reorder import (
 )
 from finn.transformation.streamline.round_thresholds import RoundAndClipThresholds
 from finn.transformation.streamline.sign_to_thres import ConvertSignToThres
+from qonnx.transformation.infer_shapes import InferShapes
 
 
 class Streamline(Transformation):
