@@ -484,19 +484,16 @@ def step_yolo_convert_to_hls(model: ModelWrapper, cfg: DataflowBuildConfig):
     model = model.transform(SortGraph())
 
     to_hls_transformations = [
-        to_hls.InferBinaryMatrixVectorActivation,
-        to_hls.InferQuantizedMatrixVectorActivation,
-        to_hls.InferThresholdingLayer,
         to_hls.InferAddStreamsLayer,
         LowerConvsToMatMul,
         to_hls.InferChannelwiseLinearLayer,
-        MakeMaxPoolNHWC,
         absorb.AbsorbTransposeIntoMultiThreshold,
         RoundAndClipThresholds,
         to_hls.InferConcatLayer,
         to_hls.InferUpsample,
         to_hls.InferQuantizedMatrixVectorActivation,
         to_hls.InferThresholdingLayer,
+        #MoveTransposePastFork,
         MakeMaxPoolNHWC,
         absorb.AbsorbConsecutiveTransposes,
         to_hls.InferStreamingMaxPool,
