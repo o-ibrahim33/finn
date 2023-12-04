@@ -385,9 +385,6 @@ def step_streamline(model: ModelWrapper, cfg: DataflowBuildConfig):
 
 def step_yolo_streamline_linear(model: ModelWrapper, cfg: DataflowBuildConfig):
     streamline_transformations = [
-        absorb.AbsorbSignBiasIntoMultiThreshold(),
-        Streamline(),
-        LowerConvsToMatMul(),
         absorb.AbsorbScalarMulAddIntoTopK(),  # before MoveAddPastMul to avoid int->float
         ConvertSubToAdd(),
         ConvertDivToMul(),
@@ -482,12 +479,6 @@ def step_yolo_convert_to_hls(model: ModelWrapper, cfg: DataflowBuildConfig):
     model.set_tensor_datatype(model.graph.input[0].name, DataType["UINT8"])
     model = model.transform(InferDataLayouts())
 
-    
-    from finn.transformation.fpgadataflow.infer_doublepacked_dsp import (
-        InferDoublePackedConv,
-    )
-        
-    #model = model.transform(InferDoublePackedConv([1]))
     model = model.transform(DoubleToSingleFloat())
     model = model.transform(InferDataTypes())
     model = model.transform(SortGraph())
