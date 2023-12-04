@@ -41,19 +41,53 @@ from qonnx.transformation.general import (
     ApplyConfig,
     GiveReadableTensorNames,
     GiveUniqueNodeNames,
+    GiveUniqueParameterTensors,
     RemoveStaticGraphInputs,
     RemoveUnusedTensors,
+    ConvertSubToAdd,
+    ConvertDivToMul,
+    SortGraph
 )
 from qonnx.transformation.infer_data_layouts import InferDataLayouts
 from qonnx.transformation.infer_datatypes import InferDataTypes
 from qonnx.transformation.infer_shapes import InferShapes
+from qonnx.transformation.insert_topk import InsertTopK
 from qonnx.transformation.lower_convs_to_matmul import LowerConvsToMatMul
 from qonnx.util.cleanup import cleanup_model
 from qonnx.util.config import extract_model_config_to_json
 from shutil import copy
 
+from qonnx.transformation.double_to_single_float import DoubleToSingleFloat
+from qonnx.transformation.remove import RemoveIdentityOps
+from finn.transformation.streamline.sign_to_thres import ConvertSignToThres
+from qonnx.transformation.batchnorm_to_affine import BatchNormToAffine
+from qonnx.core.datatype import DataType
+
+# just for not linear
+from finn.transformation.streamline.reorder import (
+    MoveLinearPastEltwiseAdd,
+    MoveLinearPastFork,
+)
+
 import finn.transformation.fpgadataflow.convert_to_hls_layers as to_hls
 import finn.transformation.streamline.absorb as absorb
+from finn.transformation.streamline.round_thresholds import RoundAndClipThresholds
+from finn.transformation.streamline.collapse_repeated import (
+    CollapseRepeatedAdd,
+    CollapseRepeatedMul,
+)
+
+from finn.transformation.streamline.reorder import (
+    MoveAddPastMul,
+    MoveScalarMulPastMatMul,
+    MoveScalarAddPastMatMul,
+    MoveAddPastConv,
+    MoveScalarMulPastConv,
+    MoveScalarLinearPastInvariants,
+    MoveMaxPoolPastMultiThreshold,
+    MoveMulPastMaxPool
+)
+
 from finn.analysis.fpgadataflow.dataflow_performance import dataflow_performance
 from finn.analysis.fpgadataflow.exp_cycles_per_layer import exp_cycles_per_layer
 from finn.analysis.fpgadataflow.hls_synth_res_estimation import hls_synth_res_estimation
@@ -305,6 +339,20 @@ def step_tidy_up(model: ModelWrapper, cfg: DataflowBuildConfig):
 
     return model
 
+def step_yolo_tidy(model: ModelWrapper, cfg: DataflowBuildConfig):
+    model = model.transform(GiveUniqueParameterTensors())
+    model = model.transform(InferShapes())
+    model = model.transform(FoldConstants())
+    model = model.transform(RemoveStaticGraphInputs())
+    model = model.transform(GiveUniqueNodeNames())
+    model = model.transform(GiveReadableTensorNames())
+    model = model.transform(InferDataTypes())
+    model = model.transform(InsertTopK())
+    model = model.transform(InferShapes())
+    model = model.transform(GiveUniqueNodeNames())
+    model = model.transform(GiveReadableTensorNames())
+    model = model.transform(InferDataTypes())
+    return model
 
 def step_streamline(model: ModelWrapper, cfg: DataflowBuildConfig):
     """Run streamlining on given model. Streamlining involves moving floating point
@@ -335,6 +383,68 @@ def step_streamline(model: ModelWrapper, cfg: DataflowBuildConfig):
 
     return model
 
+def step_yolo_streamline_linear(model: ModelWrapper, cfg: DataflowBuildConfig):
+    streamline_transformations = [
+        absorb.AbsorbSignBiasIntoMultiThreshold(),
+        Streamline(),
+        LowerConvsToMatMul,
+        absorb.AbsorbScalarMulAddIntoTopK(),  # before MoveAddPastMul to avoid int->float
+        ConvertSubToAdd(),
+        ConvertDivToMul(),
+        RemoveIdentityOps(),
+        CollapseRepeatedMul(),
+        BatchNormToAffine(),
+        ConvertSignToThres(),
+        MoveAddPastMul(),
+        MoveScalarAddPastMatMul(),
+        MoveAddPastConv(),
+        MoveScalarMulPastMatMul(),
+        MoveScalarMulPastConv(),
+        MoveScalarLinearPastInvariants(),
+        MoveAddPastMul(),
+        CollapseRepeatedAdd(),
+        CollapseRepeatedMul(),
+        absorb.AbsorbAddIntoMultiThreshold(),
+        absorb.FactorOutMulSignMagnitude(),
+        MoveMulPastMaxPool(),
+        MoveMaxPoolPastMultiThreshold(),
+        absorb.AbsorbMulIntoMultiThreshold(),
+        absorb.Absorb1BitMulIntoMatMul(),
+        absorb.Absorb1BitMulIntoConv(),
+        MakeMaxPoolNHWC(),
+        absorb.AbsorbConsecutiveTransposes(),
+        RoundAndClipThresholds(),
+    ]
+    for trn in streamline_transformations:
+        model = model.transform(trn)
+        model = model.transform(GiveUniqueNodeNames())
+    return model
+
+def step_yolo_streamline_nonlinear(model: ModelWrapper, cfg: DataflowBuildConfig):
+    streamline_transformations = [
+        MoveLinearPastEltwiseAdd(),
+        MoveLinearPastFork(),
+    ]
+    for trn in streamline_transformations:
+        model = model.transform(trn)
+        model = model.transform(GiveUniqueNodeNames())
+    return model
+
+def step_yolo_streamline(model: ModelWrapper, cfg: DataflowBuildConfig):
+
+    for iter_id in range(8):
+        model = step_yolo_streamline_linear(model, cfg)
+        model = step_yolo_streamline_nonlinear(model, cfg)
+
+        # big loop tidy up
+        model = model.transform(RemoveUnusedTensors())
+        model = model.transform(GiveReadableTensorNames())
+        model = model.transform(InferDataTypes())
+        model = model.transform(SortGraph())
+
+    model = model.transform(DoubleToSingleFloat())
+
+    return model
 
 def step_convert_to_hls(model: ModelWrapper, cfg: DataflowBuildConfig):
     """Convert eligible nodes to `HLSCustomOp` subclasses that represent HLS
@@ -366,6 +476,59 @@ def step_convert_to_hls(model: ModelWrapper, cfg: DataflowBuildConfig):
     model = model.transform(absorb.AbsorbConsecutiveTransposes())
     model = model.transform(GiveUniqueNodeNames())
     model = model.transform(InferDataLayouts())
+    return model
+
+def step_yolo_convert_to_hls(model: ModelWrapper, cfg: DataflowBuildConfig):
+    model.set_tensor_datatype(model.graph.input[0].name, DataType["UINT8"])
+    model = model.transform(InferDataLayouts())
+
+    
+    from finn.transformation.fpgadataflow.infer_doublepacked_dsp import (
+        InferDoublePackedConv,
+    )
+        
+    #model = model.transform(InferDoublePackedConv([1]))
+    model = model.transform(DoubleToSingleFloat())
+    model = model.transform(InferDataTypes())
+    model = model.transform(SortGraph())
+
+    to_hls_transformations = [
+        to_hls.InferBinaryMatrixVectorActivation,
+        to_hls.InferQuantizedMatrixVectorActivation,
+        to_hls.InferThresholdingLayer,
+        to_hls.InferAddStreamsLayer,
+        LowerConvsToMatMul,
+        to_hls.InferChannelwiseLinearLayer,
+        MakeMaxPoolNHWC,
+        absorb.AbsorbTransposeIntoMultiThreshold,
+        RoundAndClipThresholds,
+        to_hls.InferConcatLayer,
+        to_hls.InferUpsample,
+        to_hls.InferQuantizedMatrixVectorActivation,
+        to_hls.InferThresholdingLayer,
+        MakeMaxPoolNHWC,
+        absorb.AbsorbConsecutiveTransposes,
+        to_hls.InferStreamingMaxPool,
+        to_hls.InferConvInpGen,
+        to_hls.InferDuplicateStreamsLayer,
+        to_hls.InferLabelSelectLayer,
+    ]
+    for iter_id in range(4):
+        for trn in to_hls_transformations:
+            if trn.__name__=="InferConvInpGen":
+                model = model.transform(trn(cfg.force_rtl_conv_inp_gen))
+            else:
+                model = model.transform(trn())
+    
+            model = model.transform(InferDataLayouts())
+            model = model.transform(GiveUniqueNodeNames())
+            model = model.transform(InferDataTypes())
+        
+    model = model.transform(RemoveCNVtoFCFlatten())
+    model = model.transform(GiveReadableTensorNames())
+    model = model.transform(RemoveUnusedTensors())
+    model = model.transform(SortGraph())
+
     return model
 
 
@@ -600,6 +763,102 @@ def step_set_fifo_depths(model: ModelWrapper, cfg: DataflowBuildConfig):
     model = model.transform(HLSSynthIP())
     return model
 
+def step_yolo_set_fifo_depths(model: ModelWrapper, cfg: DataflowBuildConfig):
+    """
+    Depending on the auto_fifo_depths setting, do one of the following:
+    * if auto_fifo_depths=True:  Run the `InsertAndSetFIFODepths` transformation
+    to attempt to determine the FIFO sizes that provide full throughput. Involves
+    running stitched-IP rtlsim and may take a long time.
+    * if auto_fifo_depths=False:  Assume the folding config file contains FIFO
+    sizes as well. Runs the `InsertFIFO` transformation, then
+    `ApplyConfig(cfg.folding_config_file)`, and finally `RemoveShallowFIFOs`.
+    Coherency with config file node naming is ensured by calling
+    `GiveUniqueNodeNames`.
+    """
+
+    if cfg.auto_fifo_depths:
+        model = model.transform(
+            InsertAndSetFIFODepths(
+                cfg._resolve_fpga_part(),
+                cfg._resolve_hls_clk_period(),
+                vivado_ram_style=cfg.large_fifo_mem_style.value,
+            )
+        )
+    else:
+        # assume folding cfg json contains FIFO sizes too
+        # insert DWCs, FIFOs and run ApplyConfig once more
+        model = model.transform(InsertDWC())
+        # need to make sure all FIFOs are created so that their depth can be
+        # set by ApplyConfig, so create_shallow_fifos=True
+        model = model.transform(InsertFIFO(create_shallow_fifos=True))
+        model = model.transform(GiveUniqueNodeNames())
+        model = model.transform(GiveReadableTensorNames())
+        if cfg.folding_config_file is not None:
+            model = model.transform(ApplyConfig(cfg.folding_config_file))
+    # split large FIFOs into multiple FIFOs
+    model = model.transform(SplitLargeFIFOs())
+    # remove any shallow FIFOs
+    model = model.transform(RemoveShallowFIFOs())
+
+    # extract the final configuration and save it as json
+    hw_attrs = [
+        "PE",
+        "SIMD",
+        "ram_style",
+        "depth",
+        "impl_style",
+        "resType",
+        "mem_mode",
+        "runtime_writeable_weights",
+    ]
+    extract_model_config_to_json(
+        model, cfg.output_dir + "/final_hw_config.json", hw_attrs
+    )
+
+    # after FIFOs are ready to go, call PrepareIP and HLSSynthIP again
+    # this will only run for the new nodes (e.g. FIFOs and DWCs)
+    model = model.transform(
+        PrepareIP(cfg._resolve_fpga_part(), cfg._resolve_hls_clk_period())
+    )
+    model = model.transform(HLSSynthIP())
+    model = model.transform(ReplaceVerilogRelPaths())
+    return model
+
+def step_yolo_slr_floorplan(model: ModelWrapper, cfg: DataflowBuildConfig):
+    if cfg.shell_flow_type == ShellFlowType.VITIS_ALVEO:
+        try:
+            from finn.analysis.partitioning import partition
+
+            # apply partitioning of the model, restricting the first and last layers
+            # to SLR0
+            default_slr = 0
+            abs_anchors = [(0, [default_slr]), (-1, [default_slr])]
+            # increase resource limits to make partitioning feasible, except for SLR0
+            # which also has DDR subsystem
+            limits = np.array(
+                [
+                    [0.75, 0.5, 0.7, 0.6, 0.6],
+                    [1, 0.7, 0.9, 0.8, 0.8],
+                    [1, 0.7, 0.9, 0.8, 0.8],
+                    [1, 0.7, 0.9, 0.8, 0.8],
+                ]
+            )
+            floorplan = partition(
+                model,
+                cfg.synth_clk_period_ns,
+                cfg.board,
+                abs_anchors=abs_anchors,
+                multivariant=False,
+                linear_cuts=True,
+                limits=limits,
+            )[0]
+            # apply floorplan to model
+            model = model.transform(ApplyConfig(floorplan))
+            print("SLR floorplanning applied")
+        except Exception:
+            print("No SLR floorplanning applied")
+    return model
+
 
 def step_create_stitched_ip(model: ModelWrapper, cfg: DataflowBuildConfig):
     """Create stitched IP for a graph after all HLS IP blocks have been generated.
@@ -822,8 +1081,11 @@ def step_deployment_package(model: ModelWrapper, cfg: DataflowBuildConfig):
 build_dataflow_step_lookup = {
     "step_qonnx_to_finn": step_qonnx_to_finn,
     "step_tidy_up": step_tidy_up,
+    "step_yolo_tidy": step_yolo_tidy,
     "step_streamline": step_streamline,
+    "step_yolo_streamline": step_yolo_streamline,
     "step_convert_to_hls": step_convert_to_hls,
+    "step_yolo_convert_to_hls": step_yolo_convert_to_hls,
     "step_create_dataflow_partition": step_create_dataflow_partition,
     "step_target_fps_parallelization": step_target_fps_parallelization,
     "step_apply_folding_config": step_apply_folding_config,
@@ -831,6 +1093,8 @@ build_dataflow_step_lookup = {
     "step_generate_estimate_reports": step_generate_estimate_reports,
     "step_hls_codegen": step_hls_codegen,
     "step_hls_ipgen": step_hls_ipgen,
+    "step_yolo_set_fifo_depths" : step_yolo_set_fifo_depths,
+    "step_yolo_slr_floorplan" : step_yolo_slr_floorplan,
     "step_set_fifo_depths": step_set_fifo_depths,
     "step_create_stitched_ip": step_create_stitched_ip,
     "step_measure_rtlsim_performance": step_measure_rtlsim_performance,

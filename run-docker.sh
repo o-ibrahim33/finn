@@ -78,9 +78,9 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 
 # the settings below will be taken from environment variables if available,
 # otherwise the defaults below will be used
-: ${JUPYTER_PORT=9000}
+: ${JUPYTER_PORT=9001}
 : ${JUPYTER_PASSWD_HASH=""}
-: ${NETRON_PORT=8082}
+: ${NETRON_PORT=8083}
 : ${LOCALHOST_URL="localhost"}
 : ${PYNQ_USERNAME="xilinx"}
 : ${PYNQ_PASSWORD="xilinx"}
@@ -90,7 +90,7 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 : ${FINN_SSH_KEY_DIR="$SCRIPTPATH/ssh_keys"}
 : ${ALVEO_USERNAME="alveo_user"}
 : ${ALVEO_PASSWORD=""}
-: ${ALVEO_BOARD="U250"}
+: ${ALVEO_BOARD="U280"}
 : ${ALVEO_TARGET_DIR="/tmp"}
 : ${PLATFORM_REPO_PATHS="/opt/xilinx/platforms"}
 : ${XRT_DEB_VERSION="xrt_202220.2.14.354_22.04-amd64-xrt"}

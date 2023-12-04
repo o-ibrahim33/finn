@@ -48,6 +48,7 @@ class InferConvInpGen(Transformation):
         super().__init__()
         self.use_rtl_variant = use_rtl_variant
 
+
     def apply(self, model):
         graph = model.graph
         node_ind = 0

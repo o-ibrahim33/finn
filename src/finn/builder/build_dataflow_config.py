@@ -132,6 +132,22 @@ default_build_dataflow_steps = [
     "step_deployment_package",
 ]
 
+yolo_build_steps = [
+    "step_yolo_tidy",
+    "step_yolo_streamline",
+    "step_yolo_convert_to_hls",
+    "step_create_dataflow_partition",
+    "step_apply_folding_config",
+    "step_generate_estimate_reports",
+    "step_hls_codegen",
+    "step_hls_ipgen",
+    "step_yolo_set_fifo_depths",
+    "step_yolo_slr_floorplan",
+    "step_synthesize_bitfile",
+    "step_make_pynq_driver",
+    "step_deployment_package",
+]
+
 #: List of steps to run for an estimate-only (no synthesis) dataflow build
 estimate_only_dataflow_steps = [
     # "step_qonnx_to_finn",
