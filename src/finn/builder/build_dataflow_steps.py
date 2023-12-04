@@ -387,7 +387,7 @@ def step_yolo_streamline_linear(model: ModelWrapper, cfg: DataflowBuildConfig):
     streamline_transformations = [
         absorb.AbsorbSignBiasIntoMultiThreshold(),
         Streamline(),
-        LowerConvsToMatMul,
+        LowerConvsToMatMul(),
         absorb.AbsorbScalarMulAddIntoTopK(),  # before MoveAddPastMul to avoid int->float
         ConvertSubToAdd(),
         ConvertDivToMul(),
