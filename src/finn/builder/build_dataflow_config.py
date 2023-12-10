@@ -137,7 +137,7 @@ yolo_build_steps = [
     "step_yolo_streamline",
     "step_yolo_convert_to_hls",
     "step_create_dataflow_partition",
-    "step_apply_folding_config",
+    "step_target_fps_parallelization",
     "step_generate_estimate_reports",
     "step_hls_codegen",
     "step_hls_ipgen",
