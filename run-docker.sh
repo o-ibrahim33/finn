@@ -78,9 +78,9 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 
 # the settings below will be taken from environment variables if available,
 # otherwise the defaults below will be used
-: ${JUPYTER_PORT=9001}
+: ${JUPYTER_PORT=9004}
 : ${JUPYTER_PASSWD_HASH=""}
-: ${NETRON_PORT=8083}
+: ${NETRON_PORT=8078}
 : ${LOCALHOST_URL="localhost"}
 : ${PYNQ_USERNAME="xilinx"}
 : ${PYNQ_PASSWORD="xilinx"}
@@ -123,7 +123,7 @@ elif [ "$1" = "notebook" ]; then
   else
     JUPYTER_PASSWD_ARG="--NotebookApp.password='$JUPYTER_PASSWD_HASH'"
   fi
-  DOCKER_CMD="jupyter notebook --allow-root --no-browser --ip=0.0.0.0 --port $JUPYTER_PORT $JUPYTER_PASSWD_ARG notebooks"
+  DOCKER_CMD="jupyter notebook --allow-root --no-browser --ip=0.0.0.0 --port $JUPYTER_PORT notebooks"
   FINN_DOCKER_EXTRA+="-e JUPYTER_PORT=$JUPYTER_PORT "
   FINN_DOCKER_EXTRA+="-e NETRON_PORT=$NETRON_PORT "
   FINN_DOCKER_EXTRA+="-p $JUPYTER_PORT:$JUPYTER_PORT "

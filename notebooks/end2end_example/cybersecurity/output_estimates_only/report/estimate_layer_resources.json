@@ -1,0 +1,488 @@
+{
+  "FMPadding_rtl_0": {
+    "BRAM_18K": 0,
+    "BRAM_efficiency": 1,
+    "LUT": 0,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "ConvolutionInputGenerator_rtl_0": {
+    "BRAM_18K": 6,
+    "BRAM_efficiency": 1,
+    "LUT": 300,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "MatrixVectorActivation_0": {
+    "BRAM_18K": 0,
+    "BRAM_efficiency": 1,
+    "LUT": 59640,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "StreamingMaxPool_Batch_0": {
+    "BRAM_18K": 0,
+    "BRAM_efficiency": 1,
+    "LUT": 0,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "FMPadding_rtl_1": {
+    "BRAM_18K": 0,
+    "BRAM_efficiency": 1,
+    "LUT": 0,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "ConvolutionInputGenerator_rtl_1": {
+    "BRAM_18K": 8,
+    "BRAM_efficiency": 1,
+    "LUT": 300,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "MatrixVectorActivation_1": {
+    "BRAM_18K": 0,
+    "BRAM_efficiency": 1,
+    "LUT": 229125,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "StreamingMaxPool_Batch_1": {
+    "BRAM_18K": 0,
+    "BRAM_efficiency": 1,
+    "LUT": 0,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "MatrixVectorActivation_2": {
+    "BRAM_18K": 29,
+    "BRAM_efficiency": 0.367816091954023,
+    "LUT": 16210,
+    "URAM": 15,
+    "URAM_efficiency": 0.044444444444444446,
+    "DSP": 0
+  },
+  "FMPadding_rtl_2": {
+    "BRAM_18K": 0,
+    "BRAM_efficiency": 1,
+    "LUT": 0,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "ConvolutionInputGenerator_rtl_2": {
+    "BRAM_18K": 8,
+    "BRAM_efficiency": 1,
+    "LUT": 300,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "MatrixVectorActivation_3": {
+    "BRAM_18K": 256,
+    "BRAM_efficiency": 0.5,
+    "LUT": 143775,
+    "URAM": 128,
+    "URAM_efficiency": 0.0625,
+    "DSP": 0
+  },
+  "MatrixVectorActivation_4": {
+    "BRAM_18K": 57,
+    "BRAM_efficiency": 0.49902534113060426,
+    "LUT": 32156,
+    "URAM": 29,
+    "URAM_efficiency": 0.06130268199233716,
+    "DSP": 0
+  },
+  "FMPadding_rtl_3": {
+    "BRAM_18K": 0,
+    "BRAM_efficiency": 1,
+    "LUT": 0,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "ConvolutionInputGenerator_rtl_3": {
+    "BRAM_18K": 16,
+    "BRAM_efficiency": 1,
+    "LUT": 300,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "MatrixVectorActivation_5": {
+    "BRAM_18K": 1024,
+    "BRAM_efficiency": 0.5,
+    "LUT": 574764,
+    "URAM": 512,
+    "URAM_efficiency": 0.0625,
+    "DSP": 0
+  },
+  "StreamingMaxPool_Batch_2": {
+    "BRAM_18K": 0,
+    "BRAM_efficiency": 1,
+    "LUT": 0,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "MatrixVectorActivation_6": {
+    "BRAM_18K": 57,
+    "BRAM_efficiency": 0.9980506822612085,
+    "LUT": 16245,
+    "URAM": 15,
+    "URAM_efficiency": 0.23703703703703705,
+    "DSP": 0
+  },
+  "FMPadding_rtl_4": {
+    "BRAM_18K": 0,
+    "BRAM_efficiency": 1,
+    "LUT": 0,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "ConvolutionInputGenerator_rtl_4": {
+    "BRAM_18K": 8,
+    "BRAM_efficiency": 1,
+    "LUT": 300,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "MatrixVectorActivation_7": {
+    "BRAM_18K": 512,
+    "BRAM_efficiency": 1.0,
+    "LUT": 143916,
+    "URAM": 128,
+    "URAM_efficiency": 0.25,
+    "DSP": 0
+  },
+  "MatrixVectorActivation_8": {
+    "BRAM_18K": 57,
+    "BRAM_efficiency": 0.9980506822612085,
+    "LUT": 16245,
+    "URAM": 15,
+    "URAM_efficiency": 0.23703703703703705,
+    "DSP": 0
+  },
+  "FMPadding_rtl_5": {
+    "BRAM_18K": 0,
+    "BRAM_efficiency": 1,
+    "LUT": 0,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "ConvolutionInputGenerator_rtl_5": {
+    "BRAM_18K": 8,
+    "BRAM_efficiency": 1,
+    "LUT": 300,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "MatrixVectorActivation_9": {
+    "BRAM_18K": 512,
+    "BRAM_efficiency": 1.0,
+    "LUT": 143916,
+    "URAM": 128,
+    "URAM_efficiency": 0.25,
+    "DSP": 0
+  },
+  "MatrixVectorActivation_10": {
+    "BRAM_18K": 57,
+    "BRAM_efficiency": 0.9980506822612085,
+    "LUT": 16245,
+    "URAM": 15,
+    "URAM_efficiency": 0.23703703703703705,
+    "DSP": 0
+  },
+  "FMPadding_rtl_6": {
+    "BRAM_18K": 0,
+    "BRAM_efficiency": 1,
+    "LUT": 0,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "ConvolutionInputGenerator_rtl_6": {
+    "BRAM_18K": 8,
+    "BRAM_efficiency": 1,
+    "LUT": 300,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "MatrixVectorActivation_11": {
+    "BRAM_18K": 512,
+    "BRAM_efficiency": 1.0,
+    "LUT": 143916,
+    "URAM": 128,
+    "URAM_efficiency": 0.25,
+    "DSP": 0
+  },
+  "MatrixVectorActivation_12": {
+    "BRAM_18K": 57,
+    "BRAM_efficiency": 0.9980506822612085,
+    "LUT": 16245,
+    "URAM": 15,
+    "URAM_efficiency": 0.23703703703703705,
+    "DSP": 0
+  },
+  "FMPadding_rtl_7": {
+    "BRAM_18K": 0,
+    "BRAM_efficiency": 1,
+    "LUT": 0,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "ConvolutionInputGenerator_rtl_7": {
+    "BRAM_18K": 8,
+    "BRAM_efficiency": 1,
+    "LUT": 300,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "MatrixVectorActivation_13": {
+    "BRAM_18K": 512,
+    "BRAM_efficiency": 1.0,
+    "LUT": 143916,
+    "URAM": 128,
+    "URAM_efficiency": 0.25,
+    "DSP": 0
+  },
+  "MatrixVectorActivation_14": {
+    "BRAM_18K": 114,
+    "BRAM_efficiency": 0.9980506822612085,
+    "LUT": 32191,
+    "URAM": 29,
+    "URAM_efficiency": 0.24521072796934865,
+    "DSP": 0
+  },
+  "FMPadding_rtl_8": {
+    "BRAM_18K": 0,
+    "BRAM_efficiency": 1,
+    "LUT": 0,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "ConvolutionInputGenerator_rtl_8": {
+    "BRAM_18K": 16,
+    "BRAM_efficiency": 1,
+    "LUT": 300,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "MatrixVectorActivation_15": {
+    "BRAM_18K": 2048,
+    "BRAM_efficiency": 1.0,
+    "LUT": 575327,
+    "URAM": 512,
+    "URAM_efficiency": 0.25,
+    "DSP": 0
+  },
+  "StreamingMaxPool_Batch_3": {
+    "BRAM_18K": 0,
+    "BRAM_efficiency": 1,
+    "LUT": 0,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "MatrixVectorActivation_16": {
+    "BRAM_18K": 228,
+    "BRAM_efficiency": 0.9980506822612085,
+    "LUT": 16263,
+    "URAM": 15,
+    "URAM_efficiency": 0.9481481481481482,
+    "DSP": 0
+  },
+  "FMPadding_rtl_9": {
+    "BRAM_18K": 0,
+    "BRAM_efficiency": 1,
+    "LUT": 0,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "ConvolutionInputGenerator_rtl_9": {
+    "BRAM_18K": 9,
+    "BRAM_efficiency": 1,
+    "LUT": 300,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "MatrixVectorActivation_17": {
+    "BRAM_18K": 2048,
+    "BRAM_efficiency": 1.0,
+    "LUT": 144056,
+    "URAM": 128,
+    "URAM_efficiency": 1.0,
+    "DSP": 0
+  },
+  "MatrixVectorActivation_18": {
+    "BRAM_18K": 228,
+    "BRAM_efficiency": 0.9980506822612085,
+    "LUT": 16263,
+    "URAM": 15,
+    "URAM_efficiency": 0.9481481481481482,
+    "DSP": 0
+  },
+  "FMPadding_rtl_10": {
+    "BRAM_18K": 0,
+    "BRAM_efficiency": 1,
+    "LUT": 0,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "ConvolutionInputGenerator_rtl_10": {
+    "BRAM_18K": 9,
+    "BRAM_efficiency": 1,
+    "LUT": 300,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "MatrixVectorActivation_19": {
+    "BRAM_18K": 2048,
+    "BRAM_efficiency": 1.0,
+    "LUT": 144056,
+    "URAM": 128,
+    "URAM_efficiency": 1.0,
+    "DSP": 0
+  },
+  "FMPadding_rtl_11": {
+    "BRAM_18K": 0,
+    "BRAM_efficiency": 1,
+    "LUT": 0,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "ConvolutionInputGenerator_rtl_11": {
+    "BRAM_18K": 18,
+    "BRAM_efficiency": 1,
+    "LUT": 300,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "MatrixVectorActivation_20": {
+    "BRAM_18K": 4096,
+    "BRAM_efficiency": 1.0,
+    "LUT": 288095,
+    "URAM": 256,
+    "URAM_efficiency": 1.0,
+    "DSP": 0
+  },
+  "FMPadding_rtl_12": {
+    "BRAM_18K": 0,
+    "BRAM_efficiency": 1,
+    "LUT": 0,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "ConvolutionInputGenerator_rtl_12": {
+    "BRAM_18K": 24,
+    "BRAM_efficiency": 1,
+    "LUT": 300,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "MatrixVectorActivation_21": {
+    "BRAM_18K": 4096,
+    "BRAM_efficiency": 1.0,
+    "LUT": 72248,
+    "URAM": 256,
+    "URAM_efficiency": 1.0,
+    "DSP": 0
+  },
+  "FMPadding_rtl_13": {
+    "BRAM_18K": 0,
+    "BRAM_efficiency": 1,
+    "LUT": 0,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "ConvolutionInputGenerator_rtl_13": {
+    "BRAM_18K": 12,
+    "BRAM_efficiency": 1,
+    "LUT": 300,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "MatrixVectorActivation_22": {
+    "BRAM_18K": 4096,
+    "BRAM_efficiency": 1.0,
+    "LUT": 72248,
+    "URAM": 256,
+    "URAM_efficiency": 1.0,
+    "DSP": 0
+  },
+  "FMPadding_rtl_14": {
+    "BRAM_18K": 0,
+    "BRAM_efficiency": 1,
+    "LUT": 0,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "ConvolutionInputGenerator_rtl_14": {
+    "BRAM_18K": 12,
+    "BRAM_efficiency": 1,
+    "LUT": 300,
+    "URAM": 0,
+    "URAM_efficiency": 1,
+    "DSP": 0
+  },
+  "MatrixVectorActivation_23": {
+    "BRAM_18K": 4096,
+    "BRAM_efficiency": 1.0,
+    "LUT": 72248,
+    "URAM": 256,
+    "URAM_efficiency": 1.0,
+    "DSP": 0
+  },
+  "MatrixVectorActivation_24": {
+    "BRAM_18K": 89376,
+    "BRAM_efficiency": 0.9980506822612085,
+    "LUT": 32402,
+    "URAM": 5684,
+    "URAM_efficiency": 0.9808429118773946,
+    "DSP": 0
+  },
+  "MatrixVectorActivation_25": {
+    "BRAM_18K": 2940,
+    "BRAM_efficiency": 0.8888888888888888,
+    "LUT": 1299,
+    "URAM": 184,
+    "URAM_efficiency": 0.8876811594202898,
+    "DSP": 0
+  },
+  "total": {
+    "BRAM_18K": 119226.0,
+    "LUT": 3167510.0,
+    "URAM": 8975.0,
+    "DSP": 0.0
+  }
+}
