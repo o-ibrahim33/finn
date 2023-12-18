@@ -340,6 +340,9 @@ def step_tidy_up(model: ModelWrapper, cfg: DataflowBuildConfig):
     return model
 
 def step_yolo_tidy(model: ModelWrapper, cfg: DataflowBuildConfig):
+    model = cleanup_model(model)
+    model = model.transform(ConvertQONNXtoFINN())
+    
     model = model.transform(GiveUniqueParameterTensors())
     model = model.transform(InferShapes())
     model = model.transform(FoldConstants())
@@ -489,10 +492,8 @@ def step_yolo_convert_to_hls(model: ModelWrapper, cfg: DataflowBuildConfig):
         to_hls.InferChannelwiseLinearLayer,
         absorb.AbsorbTransposeIntoMultiThreshold,
         RoundAndClipThresholds,
-        to_hls.InferConcatLayer,
-        to_hls.InferUpsample,
         to_hls.InferQuantizedMatrixVectorActivation,
-        to_hls.InferThresholdingLayer,
+        #to_hls.InferThresholdingLayer,
         #MoveTransposePastFork,
         MakeMaxPoolNHWC,
         absorb.AbsorbConsecutiveTransposes,

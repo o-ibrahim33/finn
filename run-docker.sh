@@ -78,7 +78,7 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 
 # the settings below will be taken from environment variables if available,
 # otherwise the defaults below will be used
-: ${JUPYTER_PORT=9004}
+: ${JUPYTER_PORT=9005}
 : ${JUPYTER_PASSWD_HASH=""}
 : ${NETRON_PORT=8078}
 : ${LOCALHOST_URL="localhost"}
