@@ -1,0 +1,7 @@
+{
+  "critical_path_cycles": 5959132,
+  "max_cycles": 512000,
+  "max_cycles_node_name": "StreamingMaxPool_Batch_0",
+  "estimated_throughput_fps": 195.3125,
+  "estimated_latency_ns": 59591320.0
+}

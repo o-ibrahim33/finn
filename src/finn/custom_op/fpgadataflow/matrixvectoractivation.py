@@ -54,6 +54,9 @@ from finn.util.data_packing import (
 # the ... here can be any shape (representing groups of vectors)
 
 
+import logging
+logging.basicConfig(filename="/tmp/debug_matrixvector.txt",filemode="w",level = logging.INFO)
+
 class MatrixVectorActivation(HLSCustomOp):
     """Class that corresponds to finn-hls Matrix_Vector_Activate(_Stream)_Batch
     function."""
@@ -871,7 +874,11 @@ class MatrixVectorActivation(HLSCustomOp):
                 inp_is_bipolar = inp_is_bipolar or (inp_is_binary and bin_xnor_mode)
                 wt_is_bipolar = wt_is_bipolar or (wt_is_binary and bin_xnor_mode)
                 # get computed threshold datatype from attribute
+
+                
                 tdt = DataType[self.get_nodeattr("accDataType")]
+                logging.debug(f"tdt : {tdt} | allowed : {tdt.allowed}")
+
 
                 assert np.vectorize(tdt.allowed)(
                     threshold_tensor

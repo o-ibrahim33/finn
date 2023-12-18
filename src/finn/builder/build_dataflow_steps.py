@@ -389,6 +389,7 @@ def step_streamline(model: ModelWrapper, cfg: DataflowBuildConfig):
 def step_yolo_streamline_linear(model: ModelWrapper, cfg: DataflowBuildConfig):
     streamline_transformations = [
         absorb.AbsorbScalarMulAddIntoTopK(),  # before MoveAddPastMul to avoid int->float
+        absorb.AbsorbSignBiasIntoMultiThreshold(),
         ConvertSubToAdd(),
         ConvertDivToMul(),
         RemoveIdentityOps(),
@@ -487,6 +488,8 @@ def step_yolo_convert_to_hls(model: ModelWrapper, cfg: DataflowBuildConfig):
     model = model.transform(SortGraph())
 
     to_hls_transformations = [
+        MinimizeWeightBitWidth,
+        MinimizeAccumulatorWidth,
         to_hls.InferAddStreamsLayer,
         LowerConvsToMatMul,
         to_hls.InferChannelwiseLinearLayer,
@@ -506,6 +509,8 @@ def step_yolo_convert_to_hls(model: ModelWrapper, cfg: DataflowBuildConfig):
         for trn in to_hls_transformations:
             if trn.__name__=="InferConvInpGen":
                 model = model.transform(trn(cfg.force_rtl_conv_inp_gen))
+            elif trn.__name__=="InferQuantizedMatrixVectorActivation":
+                model = model.transform(trn("decoupled"))
             else:
                 model = model.transform(trn())
     

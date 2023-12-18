@@ -731,8 +731,6 @@ class InferBinaryMatrixVectorActivation(Transformation):
             model = model.transform(InferDataTypes())
         return (model, graph_modified)
 
-import logging
-logging.basicConfig(filename="/tmp/build_yolo.txt",filemode="w",level = logging.INFO)
 class InferQuantizedMatrixVectorActivation(Transformation):
     """Convert MatMul layers with quantized inputs and weights to
     MatrixVectorActivation layers. Any immediately following MultiThreshold
@@ -741,7 +739,7 @@ class InferQuantizedMatrixVectorActivation(Transformation):
     def __init__(self, mem_mode="const"):
         super().__init__()
         self.mem_mode = mem_mode
-        logging.info("Infer Quantized Matrix Vector")
+        
 
     def apply(self, model):
         graph = model.graph
@@ -749,8 +747,6 @@ class InferQuantizedMatrixVectorActivation(Transformation):
         graph_modified = False
         for n in graph.node:
             node_ind += 1
-            if n.op_type == "MatMul":
-                logging.info(f"sparsity is {model.get_tensor_sparsity(n.input[1])}")
             if n.op_type == "MatMul" and model.get_tensor_sparsity(n.input[1]) is None:
                 mm_input = n.input[0]
                 mm_weight = n.input[1]
@@ -759,7 +755,6 @@ class InferQuantizedMatrixVectorActivation(Transformation):
                 mm_out_shape = model.get_tensor_shape(mm_output)
                 idt = model.get_tensor_datatype(mm_input)
                 wdt = model.get_tensor_datatype(mm_weight)
-                logging.info(f"idt {idt.is_integer()} wdt {wdt.is_integer()}")
                 if idt.is_integer() and wdt.is_integer():
                     mm_output = n.output[0]
                     W = model.get_initializer(mm_weight)

@@ -4,16 +4,19 @@ import os
 import shutil
 import time
 
+delete = False
+
 model_name = "lpyoloW4A4"
 model_dir = os.environ['FINN_ROOT'] + "/notebooks"
 model_file = model_dir + f"/{model_name}_quant.onnx"
 
 estimates_output_dir = os.environ['FINN_ROOT']+f"/notebooks/output_finn/{model_name}"
 
-#Delete previous run results if exist
-if os.path.exists(estimates_output_dir):
-    shutil.rmtree(estimates_output_dir)
-    print("Previous run results deleted!")
+if delete:
+    #Delete previous run results if exist
+    if os.path.exists(estimates_output_dir):
+        shutil.rmtree(estimates_output_dir)
+        print("Previous run results deleted!")
 
 
 cfg_estimates = build.DataflowBuildConfig(

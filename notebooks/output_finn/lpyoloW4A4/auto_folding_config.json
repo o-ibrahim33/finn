@@ -1,48 +1,45 @@
 {
   "Defaults": {},
-  "StreamingMaxPool_Batch_0": {
-    "PE": 1
-  },
   "FMPadding_rtl_0": {
-    "SIMD": 8
+    "SIMD": 3
   },
   "ConvolutionInputGenerator_rtl_0": {
-    "SIMD": 8,
+    "SIMD": 3,
     "parallel_window": 1,
     "ram_style": "auto"
   },
   "MatrixVectorActivation_0": {
-    "PE": 4,
-    "SIMD": 18,
+    "PE": 8,
+    "SIMD": 9,
     "ram_style": "auto",
     "resType": "lut",
-    "mem_mode": "const",
+    "mem_mode": "decoupled",
     "runtime_writeable_weights": 0
   },
-  "StreamingMaxPool_Batch_1": {
+  "StreamingMaxPool_Batch_0": {
     "PE": 1
   },
   "FMPadding_rtl_1": {
     "SIMD": 8
   },
   "ConvolutionInputGenerator_rtl_1": {
-    "SIMD": 4,
+    "SIMD": 8,
     "parallel_window": 0,
     "ram_style": "auto"
   },
   "MatrixVectorActivation_1": {
-    "PE": 2,
+    "PE": 4,
     "SIMD": 18,
     "ram_style": "auto",
     "resType": "lut",
-    "mem_mode": "const",
+    "mem_mode": "decoupled",
     "runtime_writeable_weights": 0
   },
-  "StreamingMaxPool_Batch_2": {
+  "StreamingMaxPool_Batch_1": {
     "PE": 1
   },
   "FMPadding_rtl_2": {
-    "SIMD": 16
+    "SIMD": 8
   },
   "ConvolutionInputGenerator_rtl_2": {
     "SIMD": 2,
@@ -54,14 +51,14 @@
     "SIMD": 18,
     "ram_style": "auto",
     "resType": "lut",
-    "mem_mode": "const",
+    "mem_mode": "decoupled",
     "runtime_writeable_weights": 0
   },
-  "StreamingMaxPool_Batch_3": {
+  "StreamingMaxPool_Batch_2": {
     "PE": 1
   },
   "FMPadding_rtl_3": {
-    "SIMD": 32
+    "SIMD": 16
   },
   "ConvolutionInputGenerator_rtl_3": {
     "SIMD": 1,
@@ -73,14 +70,14 @@
     "SIMD": 18,
     "ram_style": "auto",
     "resType": "lut",
-    "mem_mode": "const",
+    "mem_mode": "decoupled",
     "runtime_writeable_weights": 0
   },
-  "StreamingMaxPool_Batch_4": {
+  "StreamingMaxPool_Batch_3": {
     "PE": 1
   },
   "FMPadding_rtl_4": {
-    "SIMD": 56
+    "SIMD": 32
   },
   "ConvolutionInputGenerator_rtl_4": {
     "SIMD": 1,
@@ -88,15 +85,18 @@
     "ram_style": "auto"
   },
   "MatrixVectorActivation_4": {
-    "PE": 2,
-    "SIMD": 18,
+    "PE": 1,
+    "SIMD": 24,
     "ram_style": "auto",
     "resType": "lut",
-    "mem_mode": "const",
+    "mem_mode": "decoupled",
     "runtime_writeable_weights": 0
   },
+  "StreamingMaxPool_Batch_4": {
+    "PE": 1
+  },
   "FMPadding_rtl_5": {
-    "SIMD": 104
+    "SIMD": 56
   },
   "ConvolutionInputGenerator_rtl_5": {
     "SIMD": 1,
@@ -104,39 +104,39 @@
     "ram_style": "auto"
   },
   "MatrixVectorActivation_5": {
-    "PE": 8,
+    "PE": 1,
     "SIMD": 18,
     "ram_style": "auto",
     "resType": "lut",
-    "mem_mode": "const",
-    "runtime_writeable_weights": 0
-  },
-  "MatrixVectorActivation_6": {
-    "PE": 1,
-    "SIMD": 8,
-    "ram_style": "auto",
-    "resType": "lut",
-    "mem_mode": "const",
+    "mem_mode": "decoupled",
     "runtime_writeable_weights": 0
   },
   "FMPadding_rtl_6": {
-    "SIMD": 56
+    "SIMD": 104
   },
   "ConvolutionInputGenerator_rtl_6": {
     "SIMD": 1,
     "parallel_window": 0,
     "ram_style": "auto"
   },
-  "MatrixVectorActivation_7": {
-    "PE": 2,
+  "MatrixVectorActivation_6": {
+    "PE": 4,
     "SIMD": 18,
     "ram_style": "auto",
     "resType": "lut",
-    "mem_mode": "const",
+    "mem_mode": "decoupled",
+    "runtime_writeable_weights": 0
+  },
+  "MatrixVectorActivation_7": {
+    "PE": 1,
+    "SIMD": 4,
+    "ram_style": "auto",
+    "resType": "lut",
+    "mem_mode": "decoupled",
     "runtime_writeable_weights": 0
   },
   "FMPadding_rtl_7": {
-    "SIMD": 104
+    "SIMD": 56
   },
   "ConvolutionInputGenerator_rtl_7": {
     "SIMD": 1,
@@ -144,11 +144,27 @@
     "ram_style": "auto"
   },
   "MatrixVectorActivation_8": {
-    "PE": 3,
+    "PE": 1,
     "SIMD": 18,
     "ram_style": "auto",
     "resType": "lut",
-    "mem_mode": "const",
+    "mem_mode": "decoupled",
+    "runtime_writeable_weights": 0
+  },
+  "FMPadding_rtl_8": {
+    "SIMD": 104
+  },
+  "ConvolutionInputGenerator_rtl_8": {
+    "SIMD": 1,
+    "parallel_window": 0,
+    "ram_style": "auto"
+  },
+  "MatrixVectorActivation_9": {
+    "PE": 1,
+    "SIMD": 24,
+    "ram_style": "auto",
+    "resType": "lut",
+    "mem_mode": "decoupled",
     "runtime_writeable_weights": 0
   }
 }
