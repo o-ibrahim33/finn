@@ -15,8 +15,8 @@
   },
   "MatrixVectorActivation_0": {
     "BRAM_18K": "0",
-    "FF": "216",
-    "LUT": "8401",
+    "FF": "264",
+    "LUT": "8845",
     "DSP48E": 0,
     "URAM": "0",
     "DSP": "0"
@@ -45,8 +45,8 @@
   },
   "MatrixVectorActivation_1": {
     "BRAM_18K": "0",
-    "FF": "797",
-    "LUT": "4705",
+    "FF": "1136",
+    "LUT": "5354",
     "DSP48E": 0,
     "URAM": "0",
     "DSP": "0"
@@ -75,8 +75,8 @@
   },
   "MatrixVectorActivation_2": {
     "BRAM_18K": "0",
-    "FF": "1283",
-    "LUT": "2790",
+    "FF": "1364",
+    "LUT": "3195",
     "DSP48E": 0,
     "URAM": "0",
     "DSP": "0"
@@ -104,9 +104,9 @@
     "URAM": 0
   },
   "MatrixVectorActivation_3": {
-    "BRAM_18K": "0",
-    "FF": "1654",
-    "LUT": "2887",
+    "BRAM_18K": "8",
+    "FF": "1399",
+    "LUT": "2954",
     "DSP48E": 0,
     "URAM": "0",
     "DSP": "0"
@@ -134,9 +134,9 @@
     "URAM": 0
   },
   "MatrixVectorActivation_4": {
-    "BRAM_18K": "0",
-    "FF": "1931",
-    "LUT": "1916",
+    "BRAM_18K": "8",
+    "FF": "1772",
+    "LUT": "1983",
     "DSP48E": 0,
     "URAM": "0",
     "DSP": "0"
@@ -165,8 +165,8 @@
   },
   "MatrixVectorActivation_5": {
     "BRAM_18K": "0",
-    "FF": "2701",
-    "LUT": "2038",
+    "FF": "2604",
+    "LUT": "2119",
     "DSP48E": 0,
     "URAM": "0",
     "DSP": "0"
@@ -187,16 +187,16 @@
   },
   "MatrixVectorActivation_6": {
     "BRAM_18K": "0",
-    "FF": "5634",
-    "LUT": "5564",
+    "FF": "5132",
+    "LUT": "5645",
     "DSP48E": 0,
     "URAM": "0",
     "DSP": "0"
   },
   "MatrixVectorActivation_7": {
-    "BRAM_18K": "0",
-    "FF": "1261",
-    "LUT": "1349",
+    "BRAM_18K": "4",
+    "FF": "1294",
+    "LUT": "1448",
     "DSP48E": 0,
     "URAM": "0",
     "DSP": "0"
@@ -217,8 +217,8 @@
   },
   "MatrixVectorActivation_8": {
     "BRAM_18K": "0",
-    "FF": "2701",
-    "LUT": "2038",
+    "FF": "2604",
+    "LUT": "2119",
     "DSP48E": 0,
     "URAM": "0",
     "DSP": "0"
@@ -239,8 +239,8 @@
   },
   "MatrixVectorActivation_9": {
     "BRAM_18K": "0",
-    "FF": "4050",
-    "LUT": "1445",
+    "FF": "4001",
+    "LUT": "1310",
     "DSP48E": 0,
     "URAM": "0",
     "DSP": "0"

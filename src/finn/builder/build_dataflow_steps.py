@@ -509,8 +509,6 @@ def step_yolo_convert_to_hls(model: ModelWrapper, cfg: DataflowBuildConfig):
         for trn in to_hls_transformations:
             if trn.__name__=="InferConvInpGen":
                 model = model.transform(trn(cfg.force_rtl_conv_inp_gen))
-            elif trn.__name__=="InferQuantizedMatrixVectorActivation":
-                model = model.transform(trn("decoupled"))
             else:
                 model = model.transform(trn())
     

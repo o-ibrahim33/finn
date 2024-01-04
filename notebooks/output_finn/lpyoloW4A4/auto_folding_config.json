@@ -13,7 +13,7 @@
     "SIMD": 9,
     "ram_style": "auto",
     "resType": "lut",
-    "mem_mode": "decoupled",
+    "mem_mode": "const",
     "runtime_writeable_weights": 0
   },
   "StreamingMaxPool_Batch_0": {
@@ -32,7 +32,7 @@
     "SIMD": 18,
     "ram_style": "auto",
     "resType": "lut",
-    "mem_mode": "decoupled",
+    "mem_mode": "const",
     "runtime_writeable_weights": 0
   },
   "StreamingMaxPool_Batch_1": {
@@ -51,7 +51,7 @@
     "SIMD": 18,
     "ram_style": "auto",
     "resType": "lut",
-    "mem_mode": "decoupled",
+    "mem_mode": "const",
     "runtime_writeable_weights": 0
   },
   "StreamingMaxPool_Batch_2": {
@@ -70,7 +70,7 @@
     "SIMD": 18,
     "ram_style": "auto",
     "resType": "lut",
-    "mem_mode": "decoupled",
+    "mem_mode": "const",
     "runtime_writeable_weights": 0
   },
   "StreamingMaxPool_Batch_3": {
@@ -89,7 +89,7 @@
     "SIMD": 24,
     "ram_style": "auto",
     "resType": "lut",
-    "mem_mode": "decoupled",
+    "mem_mode": "const",
     "runtime_writeable_weights": 0
   },
   "StreamingMaxPool_Batch_4": {
@@ -108,7 +108,7 @@
     "SIMD": 18,
     "ram_style": "auto",
     "resType": "lut",
-    "mem_mode": "decoupled",
+    "mem_mode": "const",
     "runtime_writeable_weights": 0
   },
   "FMPadding_rtl_6": {
@@ -124,7 +124,7 @@
     "SIMD": 18,
     "ram_style": "auto",
     "resType": "lut",
-    "mem_mode": "decoupled",
+    "mem_mode": "const",
     "runtime_writeable_weights": 0
   },
   "MatrixVectorActivation_7": {
@@ -132,7 +132,7 @@
     "SIMD": 4,
     "ram_style": "auto",
     "resType": "lut",
-    "mem_mode": "decoupled",
+    "mem_mode": "const",
     "runtime_writeable_weights": 0
   },
   "FMPadding_rtl_7": {
@@ -148,7 +148,7 @@
     "SIMD": 18,
     "ram_style": "auto",
     "resType": "lut",
-    "mem_mode": "decoupled",
+    "mem_mode": "const",
     "runtime_writeable_weights": 0
   },
   "FMPadding_rtl_8": {
@@ -161,10 +161,10 @@
   },
   "MatrixVectorActivation_9": {
     "PE": 1,
-    "SIMD": 24,
+    "SIMD": 12,
     "ram_style": "auto",
     "resType": "lut",
-    "mem_mode": "decoupled",
+    "mem_mode": "const",
     "runtime_writeable_weights": 0
   }
 }
