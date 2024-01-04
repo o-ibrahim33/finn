@@ -7,7 +7,7 @@ import time
 delete = False
 
 model_name = "lpyoloW4A4"
-model_dir = os.environ['FINN_ROOT'] + "/notebooks"
+model_dir = os.environ['FINN_ROOT'] + "/notebooks/build_model/models"
 model_file = model_dir + f"/{model_name}_quant.onnx"
 
 estimates_output_dir = os.environ['FINN_ROOT']+f"/notebooks/output_finn/{model_name}"
