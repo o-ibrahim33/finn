@@ -6,12 +6,12 @@ import time
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--onnx_model_name', type=float, default="", help='')
+parser.add_argument('--onnx_model_name', type=str, default="lpyoloW4A4", help='')
 opt = parser.parse_args()
 
 delete = False
 
-model_dir = os.environ['FINN_ROOT'] + "/build_model/models"
+model_dir = os.environ['FINN_ROOT'] + "/build_lpyolo/models"
 model_file = model_dir + f"/{opt.onnx_model_name}_quant.onnx"
 
 estimates_output_dir = os.environ['FINN_ROOT']+f"/build_lpyolo/output_finn/{opt.onnx_model_name}"
