@@ -1,0 +1,15 @@
+{
+  "step_yolo_tidy": 0.4369077682495117,
+  "step_yolo_streamline": 1.044529914855957,
+  "step_yolo_convert_to_hls": 0.9071805477142334,
+  "step_create_dataflow_partition": 0.01092982292175293,
+  "step_target_fps_parallelization": 0.033437252044677734,
+  "step_generate_estimate_reports": 0.02734994888305664,
+  "step_hls_codegen": 3.8127315044403076,
+  "step_hls_ipgen": 120.51492714881897,
+  "step_yolo_set_fifo_depths": 2297.1034615039825,
+  "step_yolo_slr_floorplan": 0.00011515617370605469,
+  "step_synthesize_bitfile": 5323.52246928215,
+  "step_make_pynq_driver": 11.43386197090149,
+  "step_deployment_package": 0.027254819869995117
+}
